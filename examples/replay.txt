@@ -1,0 +1,70 @@
+INPUT ORDER: E1 -> E2 -> E3 -> E4 -> E5 -> E6 -> E7 -> E8 -> E9 -> E10
+Original close = knowledge at that close; restated = final knowledge, before capitalization.
+
+Day 1
+  ACC-001 AED: original close=250.00; restated close=250.00; rounded daily interest=0.10
+    authorizations at close: none; active holds=0.00; available at close=250.00
+    fee assessments for this day: none
+  ACC-002 BHD: original close=0.000; restated close=0.000; rounded daily interest=0.000
+    authorizations at close: none; active holds=0.000; available at close=0.000
+    fee assessments for this day: none
+  errors observed today: none
+
+Day 2
+  ACC-001 AED: original close=250.00; restated close=225.00; rounded daily interest=0.09
+    authorizations at close: Auth-A=ACTIVE; active holds=200.00; available at close=50.00
+    fee assessments for this day: 25.00 (observed Day 5, seq 31)
+  ACC-002 BHD: original close=0.000; restated close=0.000; rounded daily interest=0.000
+    authorizations at close: none; active holds=0.000; available at close=0.000
+    fee assessments for this day: none
+  errors observed today: none
+
+Day 3
+  ACC-001 AED: original close=650.00; restated close=625.00; rounded daily interest=0.25
+    authorizations at close: Auth-A=ACTIVE; active holds=200.00; available at close=450.00
+    fee assessments for this day: none
+  ACC-002 BHD: original close=0.000; restated close=0.000; rounded daily interest=0.000
+    authorizations at close: none; active holds=0.000; available at close=0.000
+    fee assessments for this day: none
+  errors observed today: none
+
+Day 4
+  ACC-001 AED: original close=465.00; restated close=415.00; rounded daily interest=0.17
+    authorizations at close: Auth-A=SETTLED; active holds=0.00; available at close=465.00
+    fee assessments for this day: 25.00 (observed Day 5, seq 34)
+  ACC-002 BHD: original close=0.000; restated close=0.000; rounded daily interest=0.000
+    authorizations at close: none; active holds=0.000; available at close=0.000
+    fee assessments for this day: none
+  errors observed today: E6: UNKNOWN_AUTHORIZATION
+
+Day 5
+  ACC-001 AED: original close=-230.00; restated close=390.00; rounded daily interest=0.16
+    authorizations at close: Auth-A=SETTLED, Auth-B=DECLINED; active holds=0.00; available at close=-230.00
+    fee assessments for this day: 25.00 (observed Day 5, seq 39)
+  ACC-002 BHD: original close=0.000; restated close=10.000; rounded daily interest=0.004
+    authorizations at close: none; active holds=0.000; available at close=0.000
+    fee assessments for this day: none
+  errors observed today: E8: INSUFFICIENT_AVAILABLE_BALANCE
+
+Day 6
+  ACC-001 AED: original close=390.00; restated close=390.00; rounded daily interest=0.16
+    authorizations at close: Auth-A=SETTLED, Auth-B=DECLINED; active holds=0.00; available at close=390.00
+    fee assessments for this day: none
+  ACC-002 BHD: original close=10.000; restated close=10.000; rounded daily interest=0.004
+    authorizations at close: none; active holds=0.000; available at close=10.000
+    fee assessments for this day: none
+  errors observed today: none
+
+End of Day 6 after capitalization
+  ACC-001 AED: ledger=390.93; capitalized=0.93
+  ACC-002 BHD: ledger=10.008; capitalized=0.008
+
+Audit adjustments (append-only; original accruals remain)
+  seq 32: ACC-001, value Day 2, observed Day 5, delta -0.10
+  seq 33: ACC-001, value Day 3, observed Day 5, delta -0.26
+  seq 35: ACC-001, value Day 4, observed Day 5, delta -0.19
+  seq 46: ACC-001, value Day 2, observed Day 6, delta 0.09
+  seq 47: ACC-001, value Day 3, observed Day 6, delta 0.25
+  seq 48: ACC-001, value Day 4, observed Day 6, delta 0.17
+  seq 49: ACC-001, value Day 5, observed Day 6, delta 0.16
+  seq 54: ACC-002, value Day 5, observed Day 6, delta 0.004
